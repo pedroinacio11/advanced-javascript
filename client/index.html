@@ -62,12 +62,15 @@
     <script src="js/app/models/Negociacao.js"></script>
     <script>
 
-    var hoje = new Date();
-    var n1 = new Negociacao(hoje, 5 , 700);
+    // variavel VAR pdoe ser acessadas fora do escopo
 
-    console.log(n1.data);
-    hoje.setDate(11);
-    console.log(n1.data);
+    for(var i = 1; i <= 100; i++){
+      var nome = 'Pedro';
+      console.log(i);
+    }
+
+    alert(i);
+    alert(nome);
 
     </script>
 
