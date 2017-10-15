@@ -6,19 +6,22 @@ class Negociacao {
   /* quando uso _ (underline) é uma convençaõ para o
   programador dizendo que essas propriedades só podem ser acessadas pelos proprios métodos da classe.
   Ninguem de fora pode acessa-los!!! Para isso foi criado o getters para serem acessadas de fora */
-      this._data = data;
+      this._data = new Date(data.getTime());
       this._quantidade = quantidade;
       this._valor = valor;
+  // "congelando" um objeto e com isso, qualquer alteração nas suas propriedades será ignorada;
+  // Pois pela regra de negocio desse sistema uma negociação não pode ser alterada dps de criada;
+      Object.freeze(this);
+
   }
 
   get obtemVolume(){
-
     return this._quantidade * this._valor;
 
   }
 
   get data(){
-    return this._data;
+    return new Date(this._data.getTime());
   }
 
   get quantidade(){
