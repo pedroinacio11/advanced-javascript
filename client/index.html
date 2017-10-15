@@ -11,14 +11,14 @@
 
     <h1 class="text-center">Negociações</h1>
 
-    <form class="form">
+    <form class="form" onsubmit="negociacaoController.adiciona(event)">
 
         <div class="form-group">
             <label for="data">Data</label>
             <input type="date" id="data" class="form-control" required autofocus/>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" >
             <label for="quantidade">Quantidade</label>
             <input type="number" min="1" step="1" id="quantidade" class="form-control" value="1" required/>
         </div>
@@ -32,7 +32,7 @@
     </form>
 
     <div class="text-center">
-        <button class="btn btn-primary text-center" type="button">
+        <button class="btn btn-primary text-center" type="button" >
             Importar Negociações
         </button>
         <button class="btn btn-primary text-center" type="button">
@@ -60,18 +60,10 @@
     </table>
 
     <script src="js/app/models/Negociacao.js"></script>
+    <script src="js/app/controllers/NegociacaoController.js"></script>
+
     <script>
-
-    // variavel VAR pdoe ser acessadas fora do escopo
-
-    for(let i = 1; i <= 100; i++){
-      let nome = 'Pedro';
-      console.log(i);
-    }
-
-    alert(i);
-    alert(nome);
-
+    let negociacaoController = new NegociacaoController();
     </script>
 
 </body>
