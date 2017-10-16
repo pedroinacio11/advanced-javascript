@@ -1,11 +1,11 @@
-class NegociacoesView {
+class NegociacoesView extends View{
 
+// recebi um elemento e uso o super para passar para a classe pai
   constructor(elemento){
-
-      this._elemento = elemento;
+    super(elemento);
   }
 
-  _template(model){
+  template(model){
 
     return `
 
@@ -37,10 +37,6 @@ class NegociacoesView {
       </tfoot>
     </table>
     `;
-  }
-
-  update(model){
-      this._elemento.innerHTML = this._template(model);
   }
 
 }
