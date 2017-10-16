@@ -15,7 +15,7 @@ class Negociacao {
 
   }
 
-  get obtemVolume(){
+  get volume(){
     return this._quantidade * this._valor;
 
   }
