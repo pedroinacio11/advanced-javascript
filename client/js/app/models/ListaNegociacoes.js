@@ -1,15 +1,12 @@
 class ListaNegociacoes {
 
   // o armadilha recebe uma função que eu vou guardar para ser chamada dps. Quando eu chamar o adiciona e o esvazia.
-  constructor(armadilha) {
+  constructor() {
       this._negociacoes = [];
-      this._armadilha = armadilha;
   }
 
   adiciona(negociacao){
     this._negociacoes.push(negociacao);
-    //o this recebe a propria lista de negociações
-    this._armadilha(this);
   }
 
   get negociacoes(){
@@ -20,8 +17,6 @@ class ListaNegociacoes {
   esvazia(){
 
     this._negociacoes = [];
-    //o this recebe a propria lista de negociações
-    this._armadilha(this);
   }
 
 }

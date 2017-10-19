@@ -11,27 +11,14 @@ class NegociacaoController {
     this._inputQuantidade = $('#quantidade');
     this._inputValor = $('#valor');
 
-    /* Jeito antigo!
-    o model é a instância da lista de negociacoes que vai ser passada para a função quando ela for chamada
-    this é o meu NegociacaoController
-    Pq passei meu NegociacaoController? Pq eu tenho que executar essa função no contexto de NegociacaoController
-    Para isso preciso passa-la como parametro para onde realmente ela sera executada que é no ListaNegociacoes
-    Usei o Reflect.apply(this._armadilha, this._contexto, [this]);
-
-    // Jeito antigo o jeito novo está logo abaixo...
-    this._listaNegociacoes = new ListaNegociacoes(this, function(model){
-
-      this._negociacoesView.update(model);
-
-    }); */
-
-    // Usando a arowFunction vai passar meu this... pq o contexto dela é NegociacaoController que é o que
-    //a ListaNegociacoes precisa para funcionar...
+    /*
     this._listaNegociacoes = new ListaNegociacoes(model =>
         this._negociacoesView.update(model));
-
+    */    
     this._negociacoesView = new NegociacoesView($('#negociacoesView'));
     this._negociacoesView.update(this._listaNegociacoes);
+
+
 
     this._mensagem = new Mensagem();
     this._mensagemView = new MensagemView($('#mensagemView'));
