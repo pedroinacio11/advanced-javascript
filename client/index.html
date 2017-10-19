@@ -68,26 +68,44 @@
      * 
      */    
 
-    let negociacao = new Proxy(new Negociacao(new Date(), 1, 100), {
+    let lista = new Proxy(new ListaNegociacoes(), {
 
-       set: function(target, prop, value, receiver){
-           console.log(`valor anterior ${target[prop]}, novo valor: ${value}`);
-           return Reflect.set(target, prop, value, receiver);
+        //uso o get quando estou lendo um propriedade e set quando estou modificando
+       get: function(target, prop, receiver){
+           
+        //Se a propriedade que eu estou varrendo é adiciona ou esvazia e é uma função
+        
+        /**
+         * O que ta rolando aqui embaixo? rs
+         * Fiz lista.adiciona ... quando eu fiz lista.adiciona (lembre-se que métodos e funções o proxy
+         * sempre entende que é um get, pq ele sempre chama um get pra dps fazer um apply então vai cair no get)
+         * o que o if faz? --> Você está na minha lista de coisas que eu quero interceptar (no caso adiciona e esvazia)
+         * e é uma função? se sim, eu vou te substituir (o adiciona ou esvazia) por um nova função, dai quando
+         * a função adiciona for chamada ela vai imprimir console.log interceptado por prop ... 
+         * pq a funçaõ vai lembrar do contexto de execução dela, ela vai lembrar quem é prop do console, que é 
+         * a propriedade que está sendo acessada no momento. Com o Reflect.apply faço a funçaõ receber os 
+         * parametros delal, pq arguments é uma variavel implicita que me dá acesso a todos os parametros da 
+         * função(new Negociacao(new Date(), 1, 100)) qunado ela é chamada .. 
+         * 
+         * Com isso eu consigo saber quem eu quero interceptar e dps executar um código! 
+         * 
+         */ 
+            if(['adiciona', 'esvazia'].includes(prop) && typeof(target[prop]) == typeof(Function)){
+                
+                return function(){
+                    console.log(`interceptando ${prop} ` );
+                    Reflect.apply(target[prop], target, arguments);
+                }
+            }
+
+            return Reflect.get(target, prop, receiver);
        } 
 
     });
 
+    lista.adiciona(new Negociacao(new Date(), 1, 100));
+    lista.esvazia();
     
-    /* 
-     * Passando um valor para o quantidade para simular uma alteração nos valores abaixo
-     * dessa forma consigo testar o que foi passado acima e com o que está sendo passado 
-     * e ai consigo fazer uma validação dos dados, pois se forem iguais eu sei que não posso 
-     * salva-los...
-     */ 
-
-    negociacao._quantidade = 2;
-    negociacao._valor = 200
-     
     </script>
 
 </body>

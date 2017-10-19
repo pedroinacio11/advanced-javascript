@@ -6,6 +6,7 @@ class ListaNegociacoes {
   }
 
   adiciona(negociacao){
+    //gamb old -- > this._negociacoes = [].concat(this._negociacoes, negociacao);
     this._negociacoes.push(negociacao);
   }
 
