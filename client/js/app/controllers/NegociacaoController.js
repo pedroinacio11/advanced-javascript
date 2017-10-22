@@ -6,6 +6,8 @@ class NegociacaoController {
     // parecida com jQuery porém naõ verbosa.
     let $ = document.querySelector.bind(document);
 
+    this._ordemAtual = ''; // quando a página for carregada, não tem critério. Só passa a ter quando ele começa a clicar nas colunas
+
     // buscando elementos do DOM
     this._inputData = $('#data');
     this._inputQuantidade = $('#quantidade');
@@ -16,7 +18,7 @@ class NegociacaoController {
     this._listaNegociacoes = new Bind(
       new ListaNegociacoes(), 
       new NegociacoesView($('#negociacoesView')),
-      'adiciona', 'esvazia')
+      'adiciona', 'esvazia', 'ordena', 'inverteOrdem')
     
     this._mensagem = new Bind(new Mensagem(),
     new MensagemView($('#mensagemView')),
@@ -78,4 +80,14 @@ class NegociacaoController {
 
     }
 
+    ordena(coluna) {
+      if(this._ordemAtual == coluna) {
+          this._listaNegociacoes.inverteOrdem();
+      } else {
+          this._listaNegociacoes.ordena((a, b) => a[coluna] - b[coluna]);    
+      }
+      this._ordemAtual = coluna;
+  }
+
+  
 }
